@@ -142,7 +142,12 @@ print('Accuracy : ', (100 * class_correct / class_total))
 
 
 # Save the weights
-PATH = "pretrained_weights/vgg_16_wgts.pth"
-PATH_2 = "pretrained_weights/vgg_16_cpu_wgts.pth"
+save_dir = "pretrained_weights/"
+is_directory = os.path.isdir(save_dir)
+if is_directory == False:
+    os.mkdir(save_dir)
+
+PATH = save_dir + "vgg_16_wgts.pth"
+PATH_2 = save_dir + "vgg_16_cpu_wgts.pth"
 torch.save(vgg16.state_dict(), PATH)
 torch.save(vgg16.cpu().state_dict(), PATH_2)
