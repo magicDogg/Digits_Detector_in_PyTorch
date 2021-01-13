@@ -15,6 +15,15 @@ import torch.optim as optim
 from vgg_16 import VGG_16
 from utils import mser, reduce_image, gaussian_pyramid, laplacian_pyramid, non_max_suppression, digit_mark
 
+# TO_DO:
+
+# 1) Find the way of getting probability of prediction
+# 2) Rearrange the way I create RGB image
+# 3) Construct pyramid of size 5 (1 0.5 0.25 0.125 0.0625) - Don't process the first one
+# 4) Maybe apply mser on each of the windowed image to see if it gets any better? <Optional>
+# 5) After processing everything, gather bunch of windows and use non-max suppression to determine which is correct
+# Extra: Use gpu_available variable always + Get nice 5 images to demonstrate and push them
+
 
 # Load the image + Create the image pyramid
 image_path = str(sys.argv[1])
@@ -49,8 +58,8 @@ if is_directory == False:
 _, height, width = image_orig.shape
 windows_R, windows_G, windows_B, windows_pos = [], [], [], []
 windows_num = 0
-for i in range(0, height-32, 4):
-    for j in range(0, width-32, 4):
+for i in range(0, height-32, 7):
+    for j in range(0, width-32, 7):
         windows_R.append(image[0][i:i+32, j:j+32])
         windows_G.append(image[1][i:i+32, j:j+32])
         windows_B.append(image[2][i:i+32, j:j+32])
