@@ -11,8 +11,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import torch.nn.functional as nnf
 
 from vgg_16 import VGG_16
+
 
 # Load the SVHN Dataset as Digit Classes
 training_set = loadmat('data/train_32x32.mat')
